@@ -1,0 +1,93 @@
+public class 01_Apr{
+	
+	 public static void main(String[] args)
+	    {
+	        int[] nums = { 0, 0, 0, 0, 1, 1, 1 };
+	 
+	        System.out.println("The total number of 1's present is "+ count(nums, 0, nums.length - 1));
+	        
+	        
+	        int[] nums1 = { 1, 4, 6, 8, 9 };
+	        
+	        for (int i = 0; i <= 10; i++) {
+	            System.out.println("Number " + i + " �> ceil is " + getCeil(nums1, i) + ", floor is " + getFloor(nums1, i));
+	        }
+	        
+	    }	
+	
+	
+	
+	public static int count(int[] nums, int left, int right)
+   {
+ 
+       if (nums == null || nums.length == 0) {
+           return 0;
+       }
+
+     
+       if (nums[right] == 0) {
+           return 0;
+       }
+
+       if (nums[left] == 1) {
+           return (right - left + 1);
+       }
+       int mid = (left + right) / 2;
+       return count(nums, left, mid) + count(nums, mid + 1, right);
+   }
+	
+   public static int getCeil(int[] nums, int x)
+   {
+       // search space is nums[left�right]
+       int left = 0, right = nums.length - 1;
+
+       // initialize ceil to -1
+       int ceil = -1;
+
+       while (left <= right)
+       {
+          
+           int mid = (left + right) / 2;
+
+           if (nums[mid] == x) {
+               return nums[mid];
+           }
+else if (x < nums[mid])
+           {
+               ceil = nums[mid];
+               right = mid - 1;
+           }
+
+           else {
+               left = mid + 1;
+           }
+       }
+
+       return ceil;
+   }
+
+   public static int getFloor(int[] nums, int x)
+   {
+       int left = 0, right = nums.length - 1;
+   
+       int floor = -1;
+
+       while (left <= right)
+       {  
+           int mid = (left + right) / 2;
+                      if (nums[mid] == x) {
+               return nums[mid];
+           }
+                   else if (x < nums[mid]) {
+               right = mid - 1;
+           }
+                    else {
+               floor = nums[mid];
+               left = mid + 1;
+           }
+       }
+
+       return floor;
+   }
+
+}
